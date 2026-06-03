@@ -1,185 +1,124 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <title>Left and Right Rounded Images with Wrapped Text</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    /* Base / reset */
-    :root{
-      --bg-overlay: rgba(0,0,0,0.35);
-      --content-width: 920px;
-      --gutter: 2rem;
-      --accent:#ffd166;
-      --muted: rgba(255,255,255,0.85);
-    }
-    html,body{ height:100%; }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background-image: url("/magnific_seamless-website-backgrou_62KtRhKiJO.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      color: #fff;
-      padding: var(--gutter);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.6;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Left and Right Rounded Images with Wrapped Text — Mobile Friendly</title>
+<style>
+  :root{
+    --bg-overlay: rgba(0,0,0,0.35);
+    --content-width:920px;
+    --gutter:1.25rem;
+    --accent:#ffd166;
+    --muted: rgba(255,255,255,0.95);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line-height:1.5;-webkit-font-smoothing:antialiased}
+  body{
+    padding:var(--gutter);
+    color:#fff;
+    background-image:url("magnific_seamless-website-backgrou_62KtRhKiJO.jpg");
+    background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;
+  }
 
-    /* container with subtle overlay for legibility while preserving background */
-    .container{
-      max-width: var(--content-width);
-      margin: 0 auto;
-      position:relative;
-      background: linear-gradient(var(--bg-overlay), var(--bg-overlay));
-      border-radius:10px;
-      padding: clamp(1rem, 2.5vw, 2.5rem);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
-      color:var(--muted);
-    }
+  .container{
+    max-width:var(--content-width);
+    margin:0 auto;
+    background:linear-gradient(var(--bg-overlay),var(--bg-overlay));
+    border-radius:12px;
+    padding:clamp(1rem,2.5vw,2rem);
+    box-shadow:0 10px 30px rgba(0,0,0,0.45);
+    color:var(--muted);
+  }
 
-    header{ text-align:center; margin-bottom:1rem; }
-    h1{
-      margin:0 0 .35rem 0;
-      font-weight:700;
-      letter-spacing:-0.02em;
-      color: #fff;
-      font-size: clamp(1.4rem, 2.8vw, 2.2rem);
-    }
-    p.lead{
-      margin:0 auto 1.25rem auto;
-      max-width:68ch;
-      color: #f3f3f3;
-      font-size:1.03rem;
-      opacity:0.95;
-    }
+  header{text-align:center;margin-bottom:1.25rem}
+  h1{margin:0 0 .35rem 0;color:#fff;font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:-0.02em}
+  p.lead{margin:0 auto 1rem auto;max-width:68ch;color:#f3f3f3;font-size:1.03rem;opacity:0.95}
 
-    /* image sizing & floats */
-    .float-left, .float-right{
-      width:320px;
-      max-width:36%;
-      border-radius:50%;
-      overflow:hidden;
-      flex-shrink:0;
-    }
+  /* layout: use flex for wider screens, stack for narrow */
+  .layout{
+    display:flex;
+    align-items:flex-start;
+    gap:1rem;
+  }
 
-    .float-left{
-      float:left;
-      margin:0 1.25rem 1.25rem 0;
-    }
-    .float-left.second{
-      clear:left;
-      margin-top:1rem;
-    }
+  /* image figures: flexible and responsive */
+  .figure{
+    flex:0 0 auto;
+    width:320px;
+    max-width:36%;
+    border-radius:50%;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.45);
+    border:6px solid rgba(255,255,255,0.06);
+    background-clip:padding-box;
+  }
+  .figure img{display:block;width:100%;height:auto;border-radius:50%}
 
-    .float-right{
-      float:right;
-      margin:0 0 1.25rem 1.25rem;
-      transform: translateY(72px); /* lowered visually */
-    }
-    /* second right image: smaller and lowered more */
-    .float-right.second{
-      clear:right;
-      transform: translateY(120px);
-      margin-top:1rem;
-      width:220px;       /* reduced size */
-      max-width:24%;
-    }
+  /* content area flexes */
+  .content{flex:1 1 0;min-width:0}
+  .content p{margin:0 0 1rem 0;font-size:clamp(0.98rem,1.8vw,1.05rem);color:#eef2f6;word-wrap:break-word}
+  .content ul{margin:0 0 1rem 1.35rem;color:#e8eef6}
+  .content strong{color:#fff}
+  .cta{display:inline-block;margin-top:.6rem;background:linear-gradient(90deg,var(--accent),#ff9f1c);color:#111;padding:.45rem .9rem;border-radius:999px;font-weight:700;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,0.35)}
 
-    .float-left img, .float-right img{
-      display:block;
-      width:100%;
-      height:auto;
-      border-radius:50%;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.45);
-      border: 6px solid rgba(255,255,255,0.06);
-      background-clip: padding-box;
-    }
+  /* helper for stacking in small screens */
+  @media (max-width:900px){
+    .layout{flex-direction:column-reverse;gap:1rem}
+    .figure{width:220px;max-width:40%;margin:0 auto}
+    header{text-align:left}
+  }
 
-    /* content styling */
-    .content p{
-      margin:0 0 1rem 0;
-      font-size:clamp(0.98rem, 1.8vw, 1.05rem);
-      color: #eef2f6;
-      text-wrap: balance;
-    }
-    .content ul{ margin:0 0 1rem 1.35rem; color:#e8eef6; }
-    .content strong{ color:#fff; }
-    .cta{
-      display:inline-block;
-      margin-top:.6rem;
-      background: linear-gradient(90deg,var(--accent), #ff9f1c);
-      color:#111;
-      padding:.5rem .9rem;
-      border-radius:999px;
-      font-weight:700;
-      text-decoration:none;
-      box-shadow:0 6px 18px rgba(0,0,0,0.35);
-    }
+  @media (max-width:700px){
+    body{padding:.75rem}
+    .container{padding:.75rem;border-radius:8px}
+    header{text-align:left}
+    .layout{flex-direction:column;gap:.75rem}
+    .figure{width:160px;max-width:240px;border-width:5px}
+    h1{font-size:1.4rem}
+    p.lead{font-size:1rem}
+    .content p{font-size:1rem}
+  }
 
-    .clearfix::after{ content:""; display:table; clear:both; }
-
-    @media (max-width:920px){
-      .container{ padding:1.25rem; }
-      .float-left, .float-right{ width:280px; max-width:40%; }
-      .float-right{ transform: translateY(48px); }
-      .float-right.second{ transform: translateY(84px); width:200px; max-width:30%; }
-    }
-
-    @media (max-width:700px){
-      .float-left, .float-right{
-        float:none;
-        margin:0 0 1rem 0;
-        max-width:100%;
-        transform:none;
-        display:block;
-      }
-      .float-left.second, .float-right.second{ clear:none; margin-top:0; }
-      .container{ border-radius:6px; padding:1rem; }
-      header{text-align:left;}
-    }
-  </style>
+  /* fallback for very small devices */
+  @media (max-width:360px){
+    .figure{width:140px}
+    p.lead{font-size:.95rem}
+  }
+</style>
 </head>
 <body>
-  <div class="container clearfix">
-    <figure class="float-left" aria-hidden="true">
-      <img src="IMG_0713.PNG" alt="Left image">
-    </figure>
-
-
-
-    <figure class="float-right second" aria-hidden="true">
-      <img src="media-1335922550.jpg" alt="Right image 2">
-    </figure>
-
+  <div class="container" role="main">
     <header>
       <h1>¡Mejor en Bici!</h1>
-      <p class="lead">Andar en bici produce unos 21 gramos de CO2 por kilometro, mientras por cada asiento en un auto se producen alrededor de 5 toneladas métricas de CO2 por año. Al reemplazar los viajes en auto con viajes en bici, se podría reducir las emisiones asociadas a viajes hasta 67% por cada pasajero.</p>
+      <p class="lead">Andar en bici produce unos 21 gramos de CO2 por kilómetro; al reemplazar viajes en auto con bici, las emisiones por pasajero pueden reducirse hasta 67%.</p>
     </header>
 
-    <main class="content">
-      <p><strong>Ventajas</strong> Movernos en bici ofrece un sin fin de ventajas, ademas de ser una gran opción para una ciudad donde el tránsito a veces no es ideal, algunas de estas serían:</p>
+    <div class="layout">
+      <!-- Left image (visually first on wide screens) -->
+      <figure class="figure" aria-hidden="true">
+        <img src="IMG_0713.PNG" alt="Persona montando bicicleta">
+      </figure>
 
+      <!-- Main content -->
+      <main class="content" aria-labelledby="main-heading">
+        <p><strong>Ventajas</strong> Movernos en bici ofrece muchas ventajas; además de evitar tráfico, aporta salud y sostenibilidad:</p>
 
-      <ul>
-        <li><strong>Sostenibilidad:</strong> use generous line-height and comfortable measure (50–75 characters per line).</li>
-        <li><strong>Actividad Física:</strong> Por cada 30 minutos la cantidad de calorías que se consumen van de 200 a 700. Para bajar de peso se recomienda una rutina donde se eliminen al menos 300 calorías.</li>
-        <li><strong>Precticidad</strong> ¡Evita el estrés de estar en el tráfico por horas! Con los bici estacionamientos y ciclovías cada vez es más viable como medio de transporte el uso de la bici. Transpórtate seguro y encuentra espacios para guardar tu bici.</li>
-      </ul>
+        <ul>
+          <li><strong>Sostenibilidad:</strong> Bogotá ha reducido el uso del automóvil del 19% en 2020 al 11% en 2024 gracias a infraestructura para bici y políticas urbanas.</li>
+          <li><strong>Actividad física:</strong> 30 minutos de ciclismo consumen entre 200 y 700 calorías; para perder peso se recomiendan rutinas que eliminen al menos 300 kcal.</li>
+          <li><strong>Practicidad:</strong> Menos estrés por tráfico, más opciones de estacionamiento y ciclovías que facilitan su uso diario.</li>
+        </ul>
 
-      <p>Fuentes:
+        <p><strong>Fuentes:</strong></p>
+        <p style="font-size:.95rem;color:#dfe8ee;line-height:1.4">cityratings.peopleforbikes.org — transportation.ucla.edu — observatorio.movilidadbogota.gov.co</p>
+      </main>
 
-https://cityratings.peopleforbikes.org/
-https://transportation.ucla.edu/blog/how-bike-riding-benefits-environment
-
-
-</p>
-
-    </main>
+      <!-- Right image (visually second on wide screens) -->
+      <figure class="figure" aria-hidden="true">
+        <img src="media-1335922550.jpg" alt="Bicicleta estacionada">
+      </figure>
+    </div>
   </div>
 </body>
 </html>
