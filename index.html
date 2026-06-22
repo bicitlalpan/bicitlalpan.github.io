@@ -11,6 +11,8 @@
     --gutter:1.25rem;
     --accent:#ffd166;
     --muted: rgba(255,255,255,0.95);
+    --ring:6px;
+    --ring-mobile:5px;
   }
   *{box-sizing:border-box}
   html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -45,15 +47,15 @@
   /* image figures: flexible and responsive */
   .figure{
     flex:0 0 auto;
-    width:320px;
+    width:320px;              /* consistent diameter on desktop */
     max-width:36%;
     border-radius:50%;
     overflow:hidden;
     box-shadow:0 8px 20px rgba(0,0,0,0.45);
-    border:6px solid rgba(255,255,255,0.06);
+    border:var(--ring) solid rgba(255,255,255,0.06);
     background-clip:padding-box;
   }
-  .figure img{display:block;width:100%;height:auto;border-radius:50%}
+  .figure img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
 
   /* content area flexes */
   .content{flex:1 1 0;min-width:0}
@@ -62,7 +64,22 @@
   .content strong{color:#fff}
   .cta{display:inline-block;margin-top:.6rem;background:linear-gradient(90deg,var(--accent),#ff9f1c);color:#111;padding:.45rem .9rem;border-radius:999px;font-weight:700;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,0.35)}
 
-  /* helper for stacking in small screens */
+  /* Make the racks image match the circular image sizing */
+  .figure--racks{
+    width:320px;
+    max-width:100%;
+    margin:0 auto; /* centers it */
+  }
+
+  /* helper wrapper so it doesn’t break flow */
+  .racks-block{
+    margin-top:.75rem;
+    text-align:center;
+  }
+  .racks-block h2{color:#fff;margin:.2rem 0 .2rem 0}
+  .racks-block p{margin:0 0 .65rem 0}
+
+  /* stacking on small screens */
   @media (max-width:900px){
     .layout{flex-direction:column-reverse;gap:1rem}
     .figure{width:220px;max-width:40%;margin:0 auto}
@@ -74,131 +91,30 @@
     .container{padding:.75rem;border-radius:8px}
     header{text-align:left}
     .layout{flex-direction:column;gap:.75rem}
-    .figure{width:160px;max-width:240px;border-width:5px}
+
+    /* keep both side figures and racks figure consistent */
+    .figure{width:160px;max-width:240px;border-width:var(--ring-mobile)}
+    .figure--racks{width:160px;border-width:var(--ring-mobile)}
+
     h1{font-size:1.4rem}
     p.lead{font-size:1rem}
     .content p{font-size:1rem}
   }
 
-  /* fallback for very small devices */
   @media (max-width:360px){
     .figure{width:140px}
+    .figure--racks{width:140px}
     p.lead{font-size:.95rem}
   }
-</style>
-</head>
-<body>
-  <div class="container" role="main">
-    <header>
-      <h1>¡Mejor en Bici!</h1>
-      <p class="lead">Andar en bici produce unos 21 gramos de CO2 por kilómetro; mientras un viaje en auto produciría alrededor de 4.6 toneladas métricas cada año. Al reemplazar viajes en auto con bici, las emisiones por pasajero pueden reducirse hasta 67%.</p>
-    </header>
 
-    <div class="layout">
-      <!-- Left image (visually first on wide screens) -->
-      <figure class="figure" aria-hidden="true">
-        <img src="IMG_0713.PNG" alt="Persona montando bicicleta">
-      </figure>
-
-      <!-- Main content -->
-      <main class="content" aria-labelledby="main-heading">
-        <p><strong>Ventajas</strong> Movernos en bici ofrece muchas ventajas; además de evitar tráfico, aporta salud y sostenibilidad:</p>
-
-        <ul>
-          <li><strong>Sostenibilidad:</strong> Bogotá ha reducido el uso del automóvil del 19% en 2020 al 11% en 2024 gracias a infraestructura para bici y políticas urbanas.</li>
-          <li><strong>Actividad física:</strong> 30 minutos de ciclismo consumen entre 200 y 700 calorías; para perder peso se recomiendan rutinas que eliminen al menos 300 cal.</li>
-          <li><strong>Practicidad:</strong> Menos estrés por tráfico, cada vez más opciones de biciestacionamientos y ciclovías que facilitan su uso diario.</li>
-        </ul>
-
-        <div>
-            <h2>¡Manténla segura!</h2>
-            <p>Te compartimos algunos tips para poder mantener tu bici siempre segura en nuestros <strong> Bici Estacionamientos</strong></p>
-            <!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Left and Right Rounded Images with Wrapped Text — Mobile Friendly</title>
-<style>
-  :root{
-    --bg-overlay: rgba(0,0,0,0.35);
-    --content-width:920px;
-    --gutter:1.25rem;
-    --accent:#ffd166;
-    --muted: rgba(255,255,255,0.95);
+  /* iframe responsive */
+  iframe{
+    width:100%;
+    border:0;
+    height:320px; /* fallback */
   }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;line-height:1.5;-webkit-font-smoothing:antialiased}
-  body{
-    padding:var(--gutter);
-    color:#000000;
-    background-image:url("magnific_seamless-website-backgrou_62KtRhKiJO.jpg");
-    background-size:cover;background-position:center;background-repeat:no-repeat;background-attachment:fixed;
-  }
-
-  .container{
-    max-width:var(--content-width);
-    margin:0 auto;
-    background:linear-gradient(var(--bg-overlay),var(--bg-overlay));
-    border-radius:12px;
-    padding:clamp(1rem,2.5vw,2rem);
-    box-shadow:0 10px 30px rgba(0,0,0,0.45);
-    color:var(--muted);
-  }
-
-  header{text-align:center;margin-bottom:1.25rem}
-  h1{margin:0 0 .35rem 0;color:#fff;font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:-0.02em}
-  p.lead{margin:0 auto 1rem auto;max-width:68ch;color:#f3f3f3;font-size:1.03rem;opacity:0.95}
-
-  /* layout: use flex for wider screens, stack for narrow */
-  .layout{
-    display:flex;
-    align-items:flex-start;
-    gap:1rem;
-  }
-
-  /* image figures: flexible and responsive */
-  .figure{
-    flex:0 0 auto;
-    width:320px;
-    max-width:36%;
-    border-radius:50%;
-    overflow:hidden;
-    box-shadow:0 8px 20px rgba(0,0,0,0.45);
-    border:6px solid rgba(255,255,255,0.06);
-    background-clip:padding-box;
-  }
-  .figure img{display:block;width:100%;height:auto;border-radius:50%}
-
-  /* content area flexes */
-  .content{flex:1 1 0;min-width:0}
-  .content p{margin:0 0 1rem 0;font-size:clamp(0.98rem,1.8vw,1.05rem);color:#eef2f6;word-wrap:break-word}
-  .content ul{margin:0 0 1rem 1.35rem;color:#e8eef6}
-  .content strong{color:#fff}
-  .cta{display:inline-block;margin-top:.6rem;background:linear-gradient(90deg,var(--accent),#ff9f1c);color:#111;padding:.45rem .9rem;border-radius:999px;font-weight:700;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,0.35)}
-
-  /* helper for stacking in small screens */
-  @media (max-width:900px){
-    .layout{flex-direction:column-reverse;gap:1rem}
-    .figure{width:220px;max-width:40%;margin:0 auto}
-    header{text-align:left}
-  }
-
   @media (max-width:700px){
-    body{padding:.75rem}
-    .container{padding:.75rem;border-radius:8px}
-    header{text-align:left}
-    .layout{flex-direction:column;gap:.75rem}
-    .figure{width:160px;max-width:240px;border-width:5px}
-    h1{font-size:1.4rem}
-    p.lead{font-size:1rem}
-    .content p{font-size:1rem}
-  }
-
-  /* fallback for very small devices */
-  @media (max-width:360px){
-    .figure{width:140px}
-    p.lead{font-size:.95rem}
+    iframe{height:260px;}
   }
 </style>
 </head>
@@ -210,12 +126,10 @@
     </header>
 
     <div class="layout">
-      <!-- Left image (visually first on wide screens) -->
       <figure class="figure" aria-hidden="true">
         <img src="IMG_0713.PNG" alt="Persona montando bicicleta">
       </figure>
 
-      <!-- Main content -->
       <main class="content" aria-labelledby="main-heading">
         <p><strong>Ventajas</strong> Movernos en bici ofrece muchas ventajas; además de evitar tráfico, aporta salud y sostenibilidad:</p>
 
@@ -225,37 +139,23 @@
           <li><strong>Practicidad:</strong> Menos estrés por tráfico, cada vez más opciones de biciestacionamientos y ciclovías que facilitan su uso diario.</li>
         </ul>
 
-        <div>
-            <h2>¡Manténla segura!</h2>
-            <p>Te compartimos algunos tips para poder mantener tu bici siempre segura en nuestros <strong> Bici Estacionamientos</strong></p>
-            <img src="racks.jpg" alt="bike racks" width="device-width" height="auto"> 
+        <div class="racks-block">
+          <h2>¡Manténla segura!</h2>
+          <p>Te compartimos algunos tips para poder mantener tu bici siempre segura en nuestros <strong> Bici Estacionamientos</strong></p>
+
+          <!-- NOTE: use the same .figure styles so it matches size/shape -->
+          <figure class="figure figure--racks" aria-hidden="true">
+            <img src="racks.jpeg" alt="Bike racks">
+          </figure>
         </div>
 
         <p>Visita nuestro mapa con todos los biciestacionamientos en la alcaldia</p>
-        <iframe width="device-width" height="auto" src="https://www.google.com/maps/d/embed?mid=1yPYhO0DFrw0EM5zryRuNKxJy0nuptO4&ehbc=2E312F"></iframe>
+        <iframe src="https://www.google.com/maps/d/embed?mid=1yPYhO0DFrw0EM5zryRuNKxJy0nuptO4&ehbc=2E312F" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
         <p><strong>Fuentes:</strong></p>
         <p style="font-size:.95rem;color:#dfe8ee;line-height:1.4">cityratings.peopleforbikes.org — transportation.ucla.edu — observatorio.movilidadbogota.gov.co</p>
       </main>
 
-      <!-- Right image (visually second on wide screens) -->
-      <figure class="figure" aria-hidden="true">
-        <img src="media-1335922550.jpg" alt="Bicicleta estacionada">
-      </figure>
-    </div>
-  </div>
-</body>
-</html>
-        </div>
-
-        <p>Visita nuestro mapa con todos los biciestacionamientos en la alcaldia</p>
-        <iframe width="device-width" height="auto" src="https://www.google.com/maps/d/embed?mid=1yPYhO0DFrw0EM5zryRuNKxJy0nuptO4&ehbc=2E312F"></iframe>
-
-        <p><strong>Fuentes:</strong></p>
-        <p style="font-size:.95rem;color:#dfe8ee;line-height:1.4">cityratings.peopleforbikes.org — transportation.ucla.edu — observatorio.movilidadbogota.gov.co</p>
-      </main>
-
-      <!-- Right image (visually second on wide screens) -->
       <figure class="figure" aria-hidden="true">
         <img src="media-1335922550.jpg" alt="Bicicleta estacionada">
       </figure>
