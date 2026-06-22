@@ -44,10 +44,10 @@
     gap:1rem;
   }
 
-  /* image figures: flexible and responsive */
+  /* Side image figures (keep same as before: fully round) */
   .figure{
     flex:0 0 auto;
-    width:320px;              /* consistent diameter on desktop */
+    width:320px;
     max-width:36%;
     border-radius:50%;
     overflow:hidden;
@@ -55,23 +55,32 @@
     border:var(--ring) solid rgba(255,255,255,0.06);
     background-clip:padding-box;
   }
-  .figure img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
+  .figure img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+  }
 
-  /* content area flexes */
+  /* Content area flexes */
   .content{flex:1 1 0;min-width:0}
   .content p{margin:0 0 1rem 0;font-size:clamp(0.98rem,1.8vw,1.05rem);color:#eef2f6;word-wrap:break-word}
   .content ul{margin:0 0 1rem 1.35rem;color:#e8eef6}
   .content strong{color:#fff}
   .cta{display:inline-block;margin-top:.6rem;background:linear-gradient(90deg,var(--accent),#ff9f1c);color:#111;padding:.45rem .9rem;border-radius:999px;font-weight:700;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,0.35)}
 
-  /* Make the racks image match the circular image sizing */
+  /* Bike racks: same size as others, but slightly rounded (NOT perfectly round) */
   .figure--racks{
     width:320px;
     max-width:100%;
-    margin:0 auto; /* centers it */
+    margin:0 auto;
+    border-radius:22px; /* tweak rounding here */
+  }
+  .figure--racks img{
+    border-radius:22px; /* match container rounding */
   }
 
-  /* helper wrapper so it doesn’t break flow */
   .racks-block{
     margin-top:.75rem;
     text-align:center;
@@ -92,19 +101,15 @@
     header{text-align:left}
     .layout{flex-direction:column;gap:.75rem}
 
-    /* keep both side figures and racks figure consistent */
     .figure{width:160px;max-width:240px;border-width:var(--ring-mobile)}
-    .figure--racks{width:160px;border-width:var(--ring-mobile)}
-
-    h1{font-size:1.4rem}
-    p.lead{font-size:1rem}
-    .content p{font-size:1rem}
+    .figure--racks{width:160px;border-width:var(--ring-mobile);border-radius:16px;}
+    .figure--racks img{border-radius:16px;}
   }
 
   @media (max-width:360px){
     .figure{width:140px}
-    .figure--racks{width:140px}
-    p.lead{font-size:.95rem}
+    .figure--racks{width:140px;border-radius:14px;}
+    .figure--racks img{border-radius:14px;}
   }
 
   /* iframe responsive */
@@ -126,10 +131,12 @@
     </header>
 
     <div class="layout">
+      <!-- Left image -->
       <figure class="figure" aria-hidden="true">
         <img src="IMG_0713.PNG" alt="Persona montando bicicleta">
       </figure>
 
+      <!-- Main content -->
       <main class="content" aria-labelledby="main-heading">
         <p><strong>Ventajas</strong> Movernos en bici ofrece muchas ventajas; además de evitar tráfico, aporta salud y sostenibilidad:</p>
 
@@ -143,7 +150,7 @@
           <h2>¡Manténla segura!</h2>
           <p>Te compartimos algunos tips para poder mantener tu bici siempre segura en nuestros <strong> Bici Estacionamientos</strong></p>
 
-          <!-- NOTE: use the same .figure styles so it matches size/shape -->
+          <!-- Bike racks (same size as others, but slightly rounded) -->
           <figure class="figure figure--racks" aria-hidden="true">
             <img src="racks.jpeg" alt="Bike racks">
           </figure>
@@ -156,6 +163,7 @@
         <p style="font-size:.95rem;color:#dfe8ee;line-height:1.4">cityratings.peopleforbikes.org — transportation.ucla.edu — observatorio.movilidadbogota.gov.co</p>
       </main>
 
+      <!-- Right image -->
       <figure class="figure" aria-hidden="true">
         <img src="media-1335922550.jpg" alt="Bicicleta estacionada">
       </figure>
